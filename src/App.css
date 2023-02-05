@@ -78,15 +78,15 @@ input {
 }
 
 button {
-  border-radius: 0px;
-  height: 40px;
-  border: 1px solid #5f5a5a;
+  border: 1px solid #ccc;
   font-size: 16px;
   text-transform: uppercase;
   margin-left: 10px;
   font-weight: 600;
-  background: #dcfff3;
   cursor: pointer;
+  height: 44px;
+  background: #c1f2ff;
+  border-radius: 7px;
 }
 
 button:hover {
