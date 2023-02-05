@@ -13,7 +13,7 @@ const WORDS = [
 ];
 
 
-const WordScrambler = () => {
+const WordScramble = () => {
   const [isPlayOn, setPlayOn] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
@@ -91,14 +91,14 @@ const constructScrambledWordModernJS = (word) => {
 
   
   return (
-    <div className="word_scrambler">
+    <div className="word_scramble">
       {!!message && (
         <div className="message">
           <p> {message}</p>
         </div>
       )}
 
-      <h1> Word Scrambler</h1>
+      <h1> Word Scramble</h1>
       <div className="content">
         <div className="board">
           {correctWord.split("").map((el, i) => (
@@ -142,4 +142,4 @@ const constructScrambledWordModernJS = (word) => {
   );
 };
 
-export default WordScrambler;
+export default WordScramble;
