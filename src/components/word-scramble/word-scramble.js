@@ -2,144 +2,143 @@ import React, { useState, useEffect } from "react";
 import "./word-scramble.sass";
 
 const WORDS = [
-  "React",
-  "Next",
-  "Website",
-  "Engineer",
-  "TypeScript",
-  "Developer",
-  "dream Job",
-  "Time to code",
+	"React",
+	"Next",
+	"Website",
+	"Engineer",
+	"TypeScript",
+	"Developer",
+	"dream Job",
+	"Time to code",
 ];
 
-
 const WordScramble = () => {
-  const [isPlayOn, setPlayOn] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+	const [isPlayOn, setPlayOn] = useState(false);
+	const [inputValue, setInputValue] = useState("");
 
-  const [correctWord, setCorrectWord] = useState("");
-  const [scrambledWord, setScrambledWord] = useState("");
-  const [message, setMessage] = useState("");
+	const [correctWord, setCorrectWord] = useState("");
+	const [scrambledWord, setScrambledWord] = useState("");
+	const [message, setMessage] = useState("");
 
+	const handleInputChange = (event) => {
+		setInputValue(event.target.value.toUpperCase());
+	};
 
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value.toUpperCase());
-  };
+	const selectWord = () => {
+		const randomIndex = Math.floor(Math.random() * WORDS.length);
+		const tempWord = WORDS[randomIndex];
+		return tempWord;
+	};
 
-  const selectWord = () => {
-    const randomIndex = Math.floor(Math.random() * WORDS.length);
-    const tempWord = WORDS[randomIndex];
-    return tempWord;
-  };
+	const handleButtonClick = () => {
+		if (inputValue !== "") {
+			if (correctWord === inputValue) {
+				setMessage("Corret Answer");
+			} else {
+				setMessage("Wrong Answer");
+			}
+		}
+	};
 
-  const handleButtonClick = () => {
-    if (inputValue !== "") {
-      if (correctWord === inputValue) {
-        setMessage("Corret Answer");
-      } else {
-        setMessage("Wrong Answer");
-      }
-    }
-  };
+	const handleStartGame = () => {
+		setPlayOn(true);
+		setInputValue("");
+		setMessage("");
 
-  const handleStartGame = () => {
-    setPlayOn(true);
-    setInputValue("");
-    setMessage("");
+		const word = selectWord().toUpperCase();
+		setCorrectWord(word);
+		//setScrambledWord(constructScrambledWord(word));
+		setScrambledWord(constructScrambledWordModernJS(word));
+	};
 
-    const word = selectWord().toUpperCase();
-    setCorrectWord(word);
-    //setScrambledWord(constructScrambledWord(word);
-    setScrambledWord(constructScrambledWordModernJS(word));
-};
- 
+	const constructScrambledWordModernJS = (word) => {
+		const shuffledArray = word.split("").reduce(
+			(newArr, _, i) => {
+				const j = Math.floor(Math.random() * (i + 1));
+				[newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+				return newArr;
+			},
+			[...word]
+		);
+		return shuffledArray.join("");
+	};
 
-const constructScrambledWordModernJS = (word) => {
-  const shuffledArray= word.split('').reduce((newArr, _, i) => {
-    const j = Math.floor(Math.random() * (i + 1));
-    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
-    return newArr;
-}, [...word]);
-  return shuffledArray.join('')
-}
+	const constructScrambledWord = (word) => {
+		const shuffledArray = word.split("");
+		for (let i = shuffledArray.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
 
+			shuffledArray[i] = shuffledArray[j];
+			shuffledArray[j] = shuffledArray[i];
+			//[shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+		}
+		return shuffledArray.join("");
+	};
 
-  const constructScrambledWord = (arr) => {
-    const shuffledArray = arr.split("");
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-   
-        const j = Math.floor(Math.random() * (i + 1));
-        
-        shuffledArray[i] = shuffledArray[j]; 
-        shuffledArray[j] = shuffledArray[i];
-        //[shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
-    }
-    return shuffledArray.join('');
-  };
+	useEffect(() => {
+		let clearMessage;
+		if (message === "Wrong Answer") {
+			clearMessage = setTimeout(() => setMessage(""), [800]);
+		}
 
+		return () => {
+			clearTimeout(clearMessage);
+		};
+	}, [message]);
 
-  useEffect(() => {
-    let clearMessage;
-    if (message === "Wrong Answer") {
-      clearMessage = setTimeout(() => setMessage(""), [800]);
-    }
+	return (
+		<div className='word_scramble'>
+			{!!message && (
+				<div className='message'>
+					<p> {message}</p>
+				</div>
+			)}
 
-    return () => {
-      clearTimeout(clearMessage);
-    };
-  }, [message]);
+			<h1> Word Scramble</h1>
+			<div className='content'>
+				<div className='board'>
+					{correctWord.split("").map((el, i) => (
+						<span key={`${el}_${i}`} className='square_bg'>
+							{" "}
+							{inputValue[i]}{" "}
+						</span>
+					))}
+				</div>
+				<p className='scrambled_word'>{scrambledWord}</p>
 
-  
-  return (
-    <div className="word_scramble">
-      {!!message && (
-        <div className="message">
-          <p> {message}</p>
-        </div>
-      )}
+				{isPlayOn ? (
+					<div className='field'>
+						<input
+							type='text'
+							value={inputValue}
+							onChange={handleInputChange}
+						/>
+						<button type='button' onClick={handleButtonClick}>
+							Enter
+						</button>
+					</div>
+				) : (
+					<button
+						className='start_game'
+						type='button'
+						onClick={handleStartGame}
+					>
+						Start Game
+					</button>
+				)}
 
-      <h1> Word Scramble</h1>
-      <div className="content">
-        <div className="board">
-          {correctWord.split("").map((el, i) => (
-            <span key={`${el}_${i}`} className="square_bg"> {inputValue[i]} </span>
-          ))}
-        </div>
-        <p className="scrambled_word">{scrambledWord}</p>
-
-        {isPlayOn ? (
-          <div className="field">
-            <input
-              type="text"
-              value={inputValue}
-              onChange={handleInputChange}
-            />
-            <button type="button" onClick={handleButtonClick}>
-              Enter
-            </button>
-          </div>
-        ) : (
-          <button
-            className="start_game"
-            type="button"
-            onClick={handleStartGame}
-          >
-            Start Game
-          </button>
-        )}
-
-        {isPlayOn && (
-          <button
-            className="start_game new"
-            type="button"
-            onClick={handleStartGame}
-          >
-            New Game
-          </button>
-        )}
-      </div>
-    </div>
-  );
+				{isPlayOn && (
+					<button
+						className='start_game new'
+						type='button'
+						onClick={handleStartGame}
+					>
+						New Game
+					</button>
+				)}
+			</div>
+		</div>
+	);
 };
 
 export default WordScramble;
