@@ -1,0 +1,84 @@
+.word_scrambler 
+    background: #61dafb
+    width: 100%
+    color: white    
+    position: relative
+    h1
+        margin: 0
+        height: 60px
+        display: flex
+        justify-content: center
+        align-items: center
+    .message
+        width: 300px
+        height: 100px
+        background: #333
+        position: absolute
+        top: 20px
+        left: 30%
+        z-index: 2
+        display: flex
+        justify-content: center
+        align-items: center
+        box-shadow: 2px 3px 20px 0px #d0d0d0
+        p
+            color: #fff
+            font-weight: 600
+            font-size: 20px
+            
+    .content
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        background: #f3f3f3
+        padding: 50px 0px
+        width: 100%
+        position: relative
+        .board
+            display: flex
+            flex-direction: row
+            gap: 10px
+            align-items: center
+            justify-content: center
+            .square_bg
+                background: #cfcfcf
+                width: 30px
+                height: 40px
+                font-size: 18px
+                text-transform: uppercase
+                display: flex
+                flex-direction: row
+                justify-content: center
+                align-items: center
+                color: #333
+                font-weight: 600
+        .scrambled_word
+            font-size: 18px
+            color: black
+            font-weight: 600
+            text-transform: uppercase
+            letter-spacing: 1rem
+        .field
+            display: flex
+            flex-direction: row
+            align-items: center
+            justify-content: center
+            width: 80%
+            margin: auto
+            input
+                width: 70%
+                &::placeholder
+                    padding-left: 10px
+            button
+                width: 20%
+    .start_game
+        margin-top: 20px
+        background: #f6ff00
+        color: #333
+        width: 30%
+        &.new
+            position: absolute
+            bottom: -50px
+            left: 0
+            width: 21%
