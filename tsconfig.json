@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "jsx": "react",
+    "sourceMap": true,
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "rootDir": "./src",
+    "esModuleInterop": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "ignoreDeprecations": "5.0",
+    "allowJs": true,
+    "checkJs": true
+  },
+  "include": ["src/**/*.{ts,tsx,js,jsx}"],
+  "exclude": ["node_modules"]
+}

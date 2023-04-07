@@ -1,0 +1,43 @@
+.game
+    .board
+        display:flex
+        justify-content: center
+        align-items: center
+        flex-direction: column
+        gap: 10px
+        .board_row
+            display:flex
+        .cell
+            width: 100px
+            height: 100px
+            border-radius:0
+            border: none
+            text-align: center
+            vertical-align: middle
+            font-size: 50px
+            font-weight: 700
+            background-color: #f2f2f2
+            outline: none
+            margin-bottom:10px
+            &:hover
+                color: inherit
+        .cell_x
+            background: #bb76ff
+            color: white
+            &:hover
+                color:white
+        .cell_o
+            color: blue
+            &:hover
+                color:blue
+    p
+        text-transform: uppercase
+        font-size: 20px
+        font-weight:500
+        margin-top: 30px
+    .reset
+        margin-top: 20px
+        min-width: 200px
+        border-radius: 2px
+        border: none
+

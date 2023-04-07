@@ -1,7 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import WordScramble from "./components/word-scramble/word-scramble";
-import Countdown from "./components/countdown/countdown";
+import { TicTacToe } from "./components/tic-tac-toe/tic-tac-toe";
 
 function App() {
 	return (
@@ -13,8 +12,7 @@ function App() {
 				<img src={logo} className='App-logo' alt='logo' />
 			</header>
 			<main>
-				<WordScramble />
-				<Countdown />
+				<TicTacToe />
 			</main>
 		</div>
 	);
