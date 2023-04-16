@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { TicTacToe } from "./components/tic-tac-toe/tic-tac-toe";
+import { AITicTacToe } from "./components/tic-tac-toe/ai-tic-tac-toe";
 
 function App() {
 	return (
@@ -13,6 +14,7 @@ function App() {
 			</header>
 			<main>
 				<TicTacToe />
+				<AITicTacToe />
 			</main>
 		</div>
 	);
